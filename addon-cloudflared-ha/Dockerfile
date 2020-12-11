@@ -1,5 +1,6 @@
 ARG BUILD_FROM
-FROM $BUILD_FROM
+#FROM $BUILD_FROM
+FROM registry.fedoraproject.org/fedora-minimal:30
 
 ENV LANG C.UTF-8
 
