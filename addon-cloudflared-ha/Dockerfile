@@ -7,6 +7,8 @@ ENV LANG C.UTF-8
 COPY run.sh /
 RUN chmod a+x /run.sh
 
+COPY rootfs /
+
 # Python 3 HTTP Server serves the current working dir
 # So let's set it to our add-on persistent data directory.
 WORKDIR /data
