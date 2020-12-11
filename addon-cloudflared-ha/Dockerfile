@@ -22,4 +22,4 @@ RUN apt-get install python3
 
 COPY rootfs /
 
-#CMD [ "/run.sh" ]
+CMD [ "/run.sh" ]
