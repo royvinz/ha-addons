@@ -1,6 +1,5 @@
-ARG BUILD_FROM
-#FROM $BUILD_FROM
-FROM registry.fedoraproject.org/fedora-minimal
+ARG BUILD_VERSION
+FROM arm64v8/ubuntu:$BUILD_VERSION
 
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
