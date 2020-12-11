@@ -1,10 +1,10 @@
 {
     "name": "cloudflared_HA",
     "version": "0.1",
-    "slug": "folder",
+    "slug": "cloudflared_HA",
     "description": "long description",
     "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
-    "url": "website with more information about add-on (e.g., a forum thread for support)",
+    "url": "https://github.com/royvinz/ha-addons",
     "startup": "application",
     "boot": "auto",
     "ports": {
