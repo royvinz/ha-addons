@@ -13,7 +13,7 @@ RUN chmod a+x /run.sh
 WORKDIR /data
 
 # Install requirements for add-on
-RUN apt install python3
+RUN apt-get update && apt-get install  python3
 # RUN mkdir /etc/cloudflared \
 #  && curl -L -s -o cloudflared "https://github.com/cloudflare/cloudflared/releases/download/2020.11.11/cloudflared-linux-arm64"  \
 #  && chmod +x  cloudflared \
