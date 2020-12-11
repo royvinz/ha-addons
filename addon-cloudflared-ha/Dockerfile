@@ -1,5 +1,5 @@
-ARG BUILD_VERSION
-FROM arm64v8/ubuntu:latest
+ARG BUILD_FROM
+FROM tianon/raspbian:${BUILD_FROM}-slim
 
 # Set shell
 #SHELL ["/bin/bash", "-o", "pipefail", "-c"]
