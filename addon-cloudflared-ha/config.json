@@ -13,5 +13,4 @@
     "map": ["config:rw", "ssl"],
     "options": {},
     "schema": {},
-    "image": "repo/{arch}-my-custom-addon"
   }
