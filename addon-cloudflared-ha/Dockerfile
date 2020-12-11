@@ -1,5 +1,5 @@
 ARG BUILD_VERSION
-FROM arm64v8/ubuntu
+FROM arm64v8/ubuntu:latest
 
 # Set shell
 #SHELL ["/bin/bash", "-o", "pipefail", "-c"]
