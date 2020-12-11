@@ -21,6 +21,6 @@ RUN mkdir /etc/cloudflared \
  && cp cloudflared /opt/cloudflared \
  && chmod +x /opt/cloudflared
 
- COPY rootfs /
+ #COPY rootfs /
 
 #CMD [ "/run.sh" ]
