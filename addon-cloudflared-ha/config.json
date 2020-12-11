@@ -6,8 +6,11 @@
     "description": "long description",
     "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
     "url": "https://github.com/royvinz/ha-addons    ",
-    "startup": "service",
+    "startup": "application",
     "boot": "auto",
     "options": {},
-    "schema": {}
+    "schema": {},
+    "ports": {
+      "8000/tcp": 8000
+    }
   }
