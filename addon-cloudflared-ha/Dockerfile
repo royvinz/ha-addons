@@ -22,4 +22,4 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 COPY rootfs /
 
-CMD [ "/run.sh" ]
+#CMD [ "/run.sh" ]
