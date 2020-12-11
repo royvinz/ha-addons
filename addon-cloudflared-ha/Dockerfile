@@ -9,7 +9,8 @@
 # COPY run.sh /
 # RUN chmod a+x /run.sh
 
-ARG BUILD_FROM=hassioaddons/base:8.0.3
+ARG BUILD_FROM=hassioaddons/base-aarch64
+
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
@@ -17,9 +18,9 @@ FROM ${BUILD_FROM}
 #COPY rootfs /
 
 # Setup base
-RUN apk add --no-cache \
-    coreutils=8.32-r0 \
-    wget=1.20.3-r1
+#RUN apk add --no-cache \
+#    coreutils=8.32-r0 \
+#    wget=1.20.3-r1
 
 # Build arguments
 ARG BUILD_ARCH
