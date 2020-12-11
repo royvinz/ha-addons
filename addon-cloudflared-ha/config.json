@@ -1,5 +1,5 @@
 {
-    "name": "cloudflared_HA",
+    "name": "cloudflared-ha",
     "version": "0.1",
     "slug": "cloudflared_HA",
     "description": "long description",

@@ -1,6 +1,6 @@
 FROM hassioaddons/base-aarch64
 
-ENV LANG C.UTF-8
+#ENV LANG C.UTF-8
 
 # Install requirements for add-on
 RUN apk add --no-cache jq
