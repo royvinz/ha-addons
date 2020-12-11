@@ -9,11 +9,9 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 #COPY run.sh /
 #RUN chmod a+x /run.sh
 
-COPY rootfs /
-
 # Python 3 HTTP Server serves the current working dir
 # So let's set it to our add-on persistent data directory.
-WORKDIR /data
+#WORKDIR /data
 
 # Install requirements for add-on
 #RUN apk add --no-cache python3
@@ -22,5 +20,7 @@ RUN mkdir /etc/cloudflared \
  && chmod +x  cloudflared \
  && cp cloudflared /opt/cloudflared \
  && chmod +x /opt/cloudflared
+
+ COPY rootfs /
 
 #CMD [ "/run.sh" ]
