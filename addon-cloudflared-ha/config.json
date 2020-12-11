@@ -5,20 +5,19 @@
     "slug": "cloudflaredha",
     "description": "long description",
     "url": "https://github.com/royvinz/ha-addons    ",
-    "startup": "application",
+    "startup": "services",
     "boot": "auto",
-    "schema": {},
+    "schema": false,
     "arch": [
       "aarch64"
     ],
-    "ports": {
-      "8000/tcp": 8000
-    },
+    "ingress": false,
+	  "panel_icon": "mdi:docker",
+	  "homeassistant": "0.104.0",
     "map": [
-           "config:rw"
+      "config:rw"
     ],
     "options": {
-      
         "hostname": "hostname",
         "url": "http://hassio:8123",
         "certificate": "/config/cert/argo.pem"
