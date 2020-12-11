@@ -16,11 +16,11 @@ WORKDIR /data
 
 # Install requirements for add-on
 RUN apk add python3
-# RUN mkdir /etc/cloudflared \
-#  && curl -L -s -o cloudflared "https://github.com/cloudflare/cloudflared/releases/download/2020.11.11/cloudflared-linux-arm64"  \
-#  && chmod +x  cloudflared \
-#  && cp cloudflared /opt/cloudflared \
-#  && chmod +x /opt/cloudflared
+RUN mkdir /etc/cloudflared \
+  && curl -L -s -o cloudflared "https://github.com/cloudflare/cloudflared/releases/download/2020.11.11/cloudflared-linux-arm64"  \
+  && chmod +x  cloudflared \
+  && cp cloudflared /opt/cloudflared \
+  && chmod +x /opt/cloudflared
 
 COPY rootfs /
 
