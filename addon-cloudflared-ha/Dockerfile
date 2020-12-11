@@ -16,6 +16,5 @@ RUN apk add --no-cache python3
 RUN mkdir /etc/cloudflared \
  && curl -L -s -o cloudflared "https://github.com/cloudflare/cloudflared/releases/download/2020.11.11/cloudflared-linux-arm64"  \
  && chmod +x  cloudflared \
- && cp cloudflared /data/
 
 CMD [ "/run.sh" ]
