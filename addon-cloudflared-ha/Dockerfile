@@ -9,15 +9,20 @@
 # COPY run.sh /
 # RUN chmod a+x /run.sh
 
-# CMD [ "/run.sh" ]
 ARG BUILD_FROM=hassioaddons/base:8.0.3
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
-ENV LANG C.UTF-8
+# Copy root filesystem
+#COPY rootfs /
 
-# Copy data for add-on
-COPY run.sh /
-RUN chmod a+x /run.sh
+# Setup base
+RUN apk add --no-cache \
+    coreutils=8.32-r0 \
+    wget=1.20.3-r1
 
-CMD [ "/run.sh" ]
+# Build arguments
+ARG BUILD_ARCH
+ARG BUILD_DATE
+ARG BUILD_REF
+ARG BUILD_VERSION
