@@ -1,7 +1,7 @@
 
 {
     "name": "cloudflaredha",
-    "version": "0.03",
+    "version": "0.04",
     "slug": "cloudflaredha",
     "description": "long description",
     "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
