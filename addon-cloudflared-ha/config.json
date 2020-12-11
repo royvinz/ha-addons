@@ -1,2 +1,18 @@
+<<<<<<< HEAD
 
   
+=======
+{
+    "name": "cloudflaredha",
+    "version": "0.02",
+    "slug": "cloudflaredha",
+    "description": "long description",
+    "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
+    "url": "https://github.com/royvinz/ha-addons    ",
+    "startup": "application",
+    "boot": "auto",
+    "options": {},
+    "schema": {}
+  }
+  
+>>>>>>> fb41f75ae599f82838894cf12c8f6e6e7b98ac95
