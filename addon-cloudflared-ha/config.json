@@ -4,7 +4,6 @@
     "version": "0.10",
     "slug": "cloudflaredha",
     "description": "long description",
-    "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
     "url": "https://github.com/royvinz/ha-addons    ",
     "startup": "application",
     "boot": "auto",
