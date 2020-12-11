@@ -1,16 +1,27 @@
 
 {
     "name": "cloudflaredha",
-    "version": "0.06",
+    "version": "0.07",
     "slug": "cloudflaredha",
     "description": "long description",
     "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
     "url": "https://github.com/royvinz/ha-addons    ",
     "startup": "application",
     "boot": "auto",
-    "options": {},
     "schema": {},
+    "arch": [
+      "aarch64"
+    ],
     "ports": {
       "8000/tcp": 8000
+    },
+    "map": [
+           "config:rw"
+    ],
+    "options": {
+      
+        "hostname": "hostname",
+        "url": "http://hassio:8123",
+        "certificate": "/config/cert/argo.pem"
     }
   }

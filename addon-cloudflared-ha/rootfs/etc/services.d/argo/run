@@ -1,0 +1,18 @@
+#!/usr/bin/with-contenv bashio
+# ==============================================================================
+# Community Hass.io Add-ons: Node-RED
+# Starts Node-RED
+# ==============================================================================
+declare -a options
+declare certificate 
+declare url
+
+
+url=$(bashio::config 'url')
+certificate=$(bashio::config 'certificate')
+
+
+bashio::log.info "Starting CloudFlare Argo"
+
+# / Check URL
+exec /opt/cloudflared --config /etc/cloudflared/1.yml --origincert ${certificate} --no-tls-verify --proxy-connect-timeout 150s

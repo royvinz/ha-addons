@@ -1,0 +1,19 @@
+#!/usr/bin/with-contenv bashio
+# ==============================================================================
+# Community Hass.io Add-ons: Node-RED
+# Starts Node-RED
+# ==============================================================================
+declare -a options
+declare certificate2
+declare url2
+
+
+url2=$(bashio::config 'url2')
+certificate2=$(bashio::config 'certificate2')
+
+if bashio::config.has_value 'hostname2'; then
+bashio::log.info "Starting CloudFlare Argo Tunnel 2"
+
+# / Check URL
+exec /opt/cloudflared --config /etc/cloudflared/2.yml --origincert ${certificate2} --no-tls-verify --proxy-connect-timeout 150s
+fi
