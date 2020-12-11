@@ -13,4 +13,7 @@
     "map": ["config:rw", "ssl"],
     "options": {},
     "schema": {},
+    "image": "ha-addons/addon-cloudflared-ha"
+
   }
+  
