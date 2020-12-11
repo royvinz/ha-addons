@@ -6,7 +6,7 @@
     "description": "long description",
     "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
     "url": "https://github.com/royvinz/ha-addons    ",
-    "startup": "application",
+    "startup": "service",
     "boot": "auto",
     "options": {},
     "schema": {}
