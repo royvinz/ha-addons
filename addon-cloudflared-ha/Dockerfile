@@ -5,6 +5,7 @@ ENV LANG C.UTF-8
 
 # Install requirements for add-on
 RUN apk add --no-cache ca-certificates go git
+RUN go get github.com/cloudflare/cloudflare-go
 
 # Copy data for add-on
 COPY run.sh /
