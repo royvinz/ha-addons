@@ -4,7 +4,7 @@
     "slug": "cloudflared_HA",
     "description": "long description",
     "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
-    "url": "https://github.com/royvinz/ha-addons",
+    "url": "https://github.com/royvinz/ha-addons/tree/master/addon-cloudflared-ha",
     "startup": "application",
     "boot": "auto",
     "options": {},
