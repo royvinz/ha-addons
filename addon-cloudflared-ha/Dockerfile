@@ -1,6 +1,6 @@
 ARG BUILD_FROM
 #FROM $BUILD_FROM
-FROM registry.fedoraproject.org/fedora-minimal:30
+FROM registry.fedoraproject.org/fedora-minimal
 
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -21,6 +21,6 @@ RUN mkdir /etc/cloudflared \
  && cp cloudflared /opt/cloudflared \
  && chmod +x /opt/cloudflared
 
- #COPY rootfs /
+COPY rootfs /
 
 #CMD [ "/run.sh" ]

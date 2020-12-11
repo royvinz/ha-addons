@@ -1,11 +1,11 @@
 
 {
     "name": "cloudflaredha",
-    "version": "0.13",
+    "version": "0.14",
     "slug": "cloudflaredha",
     "description": "long description",
     "url": "https://github.com/royvinz/ha-addons",
-    "startup": "services",
+    "startup": "application",
     "boot": "auto",
     "schema": false,
     "arch": [
