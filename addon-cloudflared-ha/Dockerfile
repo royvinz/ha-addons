@@ -10,9 +10,9 @@
 # RUN chmod a+x /run.sh
 
 # CMD [ "/run.sh" ]
-
-ARG BUILD_FROM
-FROM $BUILD_FROM
+ARG BUILD_FROM=hassioaddons/base:8.0.3
+# hadolint ignore=DL3006
+FROM ${BUILD_FROM}
 
 ENV LANG C.UTF-8
 
