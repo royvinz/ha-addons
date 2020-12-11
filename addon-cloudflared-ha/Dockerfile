@@ -2,7 +2,8 @@ ARG BUILD_FROM
 #FROM $BUILD_FROM
 FROM registry.fedoraproject.org/fedora-minimal:30
 
-ENV LANG C.UTF-8
+# Set shell
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Copy data for add-on
 #COPY run.sh /
