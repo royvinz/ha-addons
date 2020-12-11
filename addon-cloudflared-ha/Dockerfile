@@ -1,4 +1,4 @@
-FROM %%BASE_IMAGE%%
+FROM hassioaddons/base-aarch64
 
 ENV LANG C.UTF-8
 
