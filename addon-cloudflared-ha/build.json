@@ -1,0 +1,9 @@
+{
+    "build_from": {
+      "armhf": "mycustom/base-image:latest"
+    },
+    "squash": false,
+    "args": {
+      "my_build_arg": "xy"
+    }
+  }

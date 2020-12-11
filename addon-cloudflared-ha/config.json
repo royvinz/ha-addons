@@ -1,0 +1,17 @@
+{
+    "name": "cloudflared_HA",
+    "version": "0.1",
+    "slug": "folder",
+    "description": "long description",
+    "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
+    "url": "website with more information about add-on (e.g., a forum thread for support)",
+    "startup": "application",
+    "boot": "auto",
+    "ports": {
+      "123/tcp": 123
+    },
+    "map": ["config:rw", "ssl"],
+    "options": {},
+    "schema": {},
+    "image": "repo/{arch}-my-custom-addon"
+  }
