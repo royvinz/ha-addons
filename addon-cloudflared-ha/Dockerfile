@@ -1,44 +1,66 @@
-# FROM hassioaddons/base-aarch64
-
-# #ENV LANG C.UTF-8
-
-# # Install requirements for add-on
-# RUN apk add --no-cache jq
-
-# # Copy data for add-on
-# COPY run.sh /
-# RUN chmod a+x /run.sh
-
-FROM %%BASE_IMAGE%%
-
-# Copy root filesystem
-#COPY rootfs /
-
-# Setup base
-#RUN apk add --no-cache \
-#    coreutils=8.32-r0 \
-#    wget=1.20.3-r1
-
-# Build arguments
-ARG BUILD_ARCH
-ARG BUILD_DATE
-ARG BUILD_REF
 ARG BUILD_VERSION
+FROM arm64v8/alpine:$BUILD_VERSION
 
-# Labels
-LABEL \
-    io.hass.name="ruuvitag-discovery" \
-    io.hass.description="home assistant ruuvitag discovery add-on" \
-    io.hass.arch="${BUILD_ARCH}" \
-    io.hass.type="addon" \
-    io.hass.version=${BUILD_VERSION} \
-    maintainer="Balda" \
-    org.label-schema.description="Home Assistant RuuviTag discovery add-on" \
-    org.label-schema.build-date=${BUILD_DATE} \
-    org.label-schema.name="ruuvitag-discovery" \
-    org.label-schema.schema-version="1.0" \
-    org.label-schema.url="https://github.com/balda/ruuvitag-discovery" \
-    org.label-schema.usage="https://github.com/balda/ruuvitag-discovery/README.md" \
-    org.label-schema.vcs-ref=${BUILD_REF} \
-    org.label-schema.vcs-url="https://github.com/balda/ruuvitag-discovery" \
-    org.label-schema.vendor="Community Hass.io Addons"
+# QEMU for crossbuilds
+COPY qemu-aarch64-static /usr/bin/qemu-aarch64-static
+
+# Default ENV
+ENV \
+    LANG="C.UTF-8" \
+    S6_BEHAVIOUR_IF_STAGE2_FAILS=2 \
+    S6_CMD_WAIT_FOR_SERVICES=1
+
+# Set shell
+SHELL ["/bin/ash", "-o", "pipefail", "-c"]
+
+# Version
+ARG BASHIO_VERSION=0.9.0
+ARG TEMPIO_VERSION=2020.10.2
+ARG S6_OVERLAY_VERSION=2.1.0.2
+ARG JEMALLOC_VERSION=5.2.1
+
+# Base system
+WORKDIR /usr/src
+ARG BUILD_ARCH
+
+RUN \
+    set -x \
+    && apk add --no-cache \
+        bash \
+        bind-tools \
+        ca-certificates \
+        curl \
+        jq \
+        "tzdata>=2020c-r1" \
+    \
+    && apk add --no-cache --virtual .build-deps \
+        build-base \
+    \
+    && curl -L -f -s "https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-aarch64.tar.gz" \
+        | tar zxvf - -C / \
+    && mkdir -p /etc/fix-attrs.d \
+    && mkdir -p /etc/services.d \
+    \
+    && curl -L -f -s "https://github.com/jemalloc/jemalloc/releases/download/${JEMALLOC_VERSION}/jemalloc-${JEMALLOC_VERSION}.tar.bz2" \
+        | tar -xjf - -C /usr/src \
+    && cd /usr/src/jemalloc-${JEMALLOC_VERSION} \
+    && ./configure \
+    && make \
+    && make install \
+    \
+    && mkdir -p /usr/src/bashio \
+    && curl -L -f -s "https://github.com/hassio-addons/bashio/archive/v${BASHIO_VERSION}.tar.gz" \
+        | tar -xzf - --strip 1 -C /usr/src/bashio \
+    && mv /usr/src/bashio/lib /usr/lib/bashio \
+    && ln -s /usr/lib/bashio/bashio /usr/bin/bashio \
+    \
+    && curl -L -f -s -o /usr/bin/tempio \
+        "https://github.com/home-assistant/tempio/releases/download/${TEMPIO_VERSION}/tempio_${BUILD_ARCH}" \
+    && chmod a+x /usr/bin/tempio \
+    \
+    && apk del .build-deps \
+    && rm -rf /usr/src/*
+
+# S6-Overlay
+WORKDIR /
+ENTRYPOINT ["/init"]
