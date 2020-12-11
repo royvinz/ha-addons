@@ -2,7 +2,7 @@ ARG BUILD_VERSION
 FROM arm64v8/ubuntu
 
 # Set shell
-#SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Copy data for add-on
 #COPY run.sh /
@@ -13,7 +13,7 @@ FROM arm64v8/ubuntu
 #WORKDIR /data
 
 # Install requirements for add-on
-RUN apt get python3
+#RUN apt get python3
 # RUN mkdir /etc/cloudflared \
 #  && curl -L -s -o cloudflared "https://github.com/cloudflare/cloudflared/releases/download/2020.11.11/cloudflared-linux-arm64"  \
 #  && chmod +x  cloudflared \
