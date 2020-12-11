@@ -1,13 +1,2 @@
-{
-    "name": "cloudflaredha",
-    "version": "0.02",
-    "slug": "cloudflared_HA",
-    "description": "long description",
-    "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
-    "url": "https://github.com/royvinz/ha-addons    ",
-    "startup": "application",
-    "boot": "auto",
-    "options": {},
-    "schema": {}
-  }
+
   
