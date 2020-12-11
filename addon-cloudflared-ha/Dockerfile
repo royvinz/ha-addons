@@ -9,10 +9,7 @@
 # COPY run.sh /
 # RUN chmod a+x /run.sh
 
-ARG BUILD_FROM=hassioaddons/base-aarch64
-
-# hadolint ignore=DL3006
-FROM ${BUILD_FROM}
+FROM %%BASE_IMAGE%%
 
 # Copy root filesystem
 #COPY rootfs /
