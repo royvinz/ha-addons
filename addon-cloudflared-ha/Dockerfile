@@ -1,4 +1,4 @@
-FROM hassioaddons/base-aarch64:latest
+FROM hassioaddons/base-aarch64
 
 ENV LANG C.UTF-8
 
