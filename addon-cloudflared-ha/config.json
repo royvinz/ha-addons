@@ -1,6 +1,6 @@
 {
     "name": "cloudflared_HA",
-    "version": "0.1",
+    "version": "0.2",
     "slug": "cloudflared_HA",
     "description": "long description",
     "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
