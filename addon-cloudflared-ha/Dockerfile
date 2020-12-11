@@ -5,8 +5,8 @@ FROM registry.fedoraproject.org/fedora-minimal:30
 ENV LANG C.UTF-8
 
 # Copy data for add-on
-COPY run.sh /
-RUN chmod a+x /run.sh
+#COPY run.sh /
+#RUN chmod a+x /run.sh
 
 COPY rootfs /
 
@@ -22,4 +22,4 @@ RUN mkdir /etc/cloudflared \
  && cp cloudflared /opt/cloudflared \
  && chmod +x /opt/cloudflared
 
-CMD [ "/run.sh" ]
+#CMD [ "/run.sh" ]
