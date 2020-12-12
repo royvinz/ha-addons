@@ -7,7 +7,9 @@ FROM $BUILD_FROM
 RUN apk add --no-cache ca-certificates \
         git \
         gcc \
-        build-base
+        build-base \
+        go
+        
 # Fetch go code
 RUN go get -v github.com/cloudflare/cloudflared/cmd/cloudflared
 
