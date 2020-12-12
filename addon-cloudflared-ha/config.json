@@ -11,7 +11,7 @@
     "arch": [
       "aarch64"
     ],
-    "image": "visibilityspots/cloudflared",
+    "image": "cloudflare/cloudflared",
     "ingress": false,
 	  "panel_icon": "mdi:docker",
 	  "homeassistant": "0.104.0",
