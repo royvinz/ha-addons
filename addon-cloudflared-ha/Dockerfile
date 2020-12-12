@@ -11,7 +11,10 @@ RUN git clone https://github.com/cloudflare/cloudflared.git \
     && cd cloudflared/ \
     && go clean \
     && go get github.com/cloudflare/cloudflared/cmd/cloudflared \
-    && make cloudflared
+    && make cloudflared \
+    && mv cloudflared /usr/local/bin/cloudflared \
+    && chmod +x /usr/local/bin/cloudflared
+
 #RUN go get -v github.com/cloudflare/cloudflared/cmd/cloudflared
 
 # Set working directory and build
