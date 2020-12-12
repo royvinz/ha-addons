@@ -1,7 +1,8 @@
 
 {
     "name": "cloudflaredha",
-    "version": "0.16.1",
+    "version": "latest",
+    "image": "msnelling/cloudflared",
     "slug": "cloudflaredha",
     "description": "long description",
     "url": "https://github.com/royvinz/ha-addons",
@@ -17,13 +18,13 @@
       "config:rw"
     ],
     "options": {
-        "hostname": "hostname",
-        "url": "http://hassio:8123",
-        "certificate": "/config/cert/argo.pem"
+        "TUNNEL_HOSTNAME": "hostname",
+        "TUNNEL_ORIGIN_URL": "http://hassio:8123",
+        "TUNNEL_ORIGIN_CERT": "/config/cert/argo.pem"
     },
     "schema": {
-      "hostname": "str",
-      "url": "str",
-      "certificate": "str"
+      "TUNNEL_HOSTNAME": "str",
+      "TUNNEL_ORIGIN_URL": "str",
+      "TUNNEL_ORIGIN_CERT": "str"
     }
   }
