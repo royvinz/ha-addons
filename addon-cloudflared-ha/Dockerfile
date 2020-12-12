@@ -8,7 +8,7 @@ ARG VERSION
 COPY --from=xgo / /
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
-RUN printf "I am running on ${BUILDPLATFORM:-linux/amd64}, building for ${TARGETPLATFORM:-linux/amd64}\n$(uname -a)\n"
+#RUN printf "I am running on ${BUILDPLATFORM:-linux/amd64}, building for ${TARGETPLATFORM:-linux/amd64}\n$(uname -a)\n"
 
 ENV CLOUDFLARED_VERSION="2020.11.9"
 
