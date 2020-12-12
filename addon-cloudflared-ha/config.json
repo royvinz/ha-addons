@@ -1,7 +1,7 @@
 
 {
     "name": "cloudflaredha",
-    "version": "0.17",
+    "version": "0.18",
     "slug": "cloudflaredha",
     "description": "long description",
     "url": "https://github.com/royvinz/ha-addons",
@@ -10,7 +10,7 @@
     "arch": [
       "aarch64"
     ],
-    "ingress": false,
+    "ingress": true,
 	  "panel_icon": "mdi:docker",
 	  "homeassistant": "0.104.0",
     "map": [
