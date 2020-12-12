@@ -16,8 +16,8 @@ RUN apk --update --no-cache add \
     bash \
     build-base \
     gcc \
-    git \
-  && rm -rf /tmp/* /var/cache/apk/*
+    git 
+  #&& rm -rf /tmp/* /var/cache/apk/*
 
 RUN git clone --branch ${CLOUDFLARED_VERSION} https://github.com/cloudflare/cloudflared /go/src/github.com/cloudflare/cloudflared
 WORKDIR /go/src/github.com/cloudflare/cloudflared
