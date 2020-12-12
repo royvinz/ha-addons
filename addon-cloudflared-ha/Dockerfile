@@ -13,7 +13,9 @@ RUN git clone https://github.com/cloudflare/cloudflared.git \
     && go get github.com/cloudflare/cloudflared/cmd/cloudflared \
     && make cloudflared \
     && mv cloudflared /usr/local/bin/cloudflared \
-    && chmod +x /usr/local/bin/cloudflared
+    && chmod +x /usr/local/bin/cloudflared \
+    && mkdir /etc/cloudflared
+
 
 #RUN go get -v github.com/cloudflare/cloudflared/cmd/cloudflared
 
@@ -32,6 +34,7 @@ RUN git clone https://github.com/cloudflare/cloudflared.git \
 #__CROSS_COPY qemu/qemu-__QEMU_ARCH__-static /usr/bin/
 #COPY --from=builder /go/bin/app /usr/local/bin/cloudflared
 #COPY --from=builder /etc/ssl/certs/ /etc/ssl/certs/
+COPY rootfs / 
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod u+x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]

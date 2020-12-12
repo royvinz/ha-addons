@@ -17,13 +17,13 @@
       "config:rw"
     ],
     "options": {
-        "TUNNEL_HOSTNAME": "hostname",
-        "TUNNEL_ORIGIN_URL": "http://hassio:8123",
-        "TUNNEL_ORIGIN_CERT": "/config/cert/argo.pem"
+        "hostname": "hostname",
+        "url": "http://hassio:8123",
+        "certificate": "/config/cert/argo.pem"
     },
     "schema": {
-      "TUNNEL_HOSTNAME": "str",
-      "TUNNEL_ORIGIN_URL": "str",
-      "TUNNEL_ORIGIN_CERT": "str"
+      "hostname": "str",
+      "url": "str",
+      "certificate": "str"
     }
   }
