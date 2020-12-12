@@ -11,7 +11,7 @@
     "arch": [
       "aarch64"
     ],
-    "image": "crazymax/cloudflared",
+    "image": "klutchell/cloudflared",
     "ingress": false,
 	  "panel_icon": "mdi:docker",
 	  "homeassistant": "0.104.0",
