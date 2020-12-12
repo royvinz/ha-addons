@@ -5,7 +5,7 @@
     "slug": "cloudflaredha",
     "description": "long description",
     "url": "https://github.com/royvinz/ha-addons",
-    "startup": "application",
+    "startup": "services",
     "boot": "auto",
     "schema": false,
     "arch": [

@@ -20,9 +20,8 @@ WORKDIR /data
 #UN apk add python3
 RUN mkdir /etc/cloudflared \
   && curl -L -s -o cloudflared "https://github.com/cloudflare/cloudflared/releases/download/2020.11.11/cloudflared-linux-arm64"  \
-  && chmod +x  cloudflared \
-  && cp cloudflared /opt/cloudflared \
-  && chmod +x /opt/cloudflared
+  && cp cloudflared /usr/bin/cloudflared \
+  && chmod +x /usr/bin/cloudflared
 
 COPY rootfs /
 
