@@ -7,17 +7,22 @@ RUN apk add --no-cache ca-certificates \
         build-base 
 
 # Fetch go code
-RUN go get -v github.com/cloudflare/cloudflared/cmd/cloudflared
+RUN git clone https://github.com/cloudflare/cloudflared.git \
+    && cd cloudflared/ \
+    && go clean \
+    && go get github.com/cloudflare/cloudflared/cmd/cloudflared \
+    && make cloudflared
+#RUN go get -v github.com/cloudflare/cloudflared/cmd/cloudflared
 
 # Set working directory and build
-WORKDIR /go/src/github.com/cloudflare/cloudflared/cmd/cloudflared
-RUN CGO_ENABLED=0 \
-    GOOS=linux \
-    go build \
-    -o /go/bin/app \
-    -ldflags '-w -s -extldflags "-static"' \
-    /go/src/github.com/cloudflare/cloudflared/cmd/cloudflared
-RUN chmod u+x /go/bin/app
+#WORKDIR /go/src/github.com/cloudflare/cloudflared/cmd/cloudflared
+#RUN CGO_ENABLED=0 \
+#    GOOS=linux \
+#    go build \
+#    -o /go/bin/app \
+#    -ldflags '-w -s -extldflags "-static"' \
+#    /go/src/github.com/cloudflare/cloudflared/cmd/cloudflared
+#RUN chmod u+x /go/bin/app
 
 # Setup our scratch container
 
