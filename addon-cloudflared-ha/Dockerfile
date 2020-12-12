@@ -1,6 +1,8 @@
-ARG BUILD_FROM=hassioaddons/armhf-base-raspbian
+
+##ARG BUILD_FROM=hassioaddons/armhf-base-raspbian
 # hadolint ignore=DL3006
-FROM ${BUILD_FROM}
+#FROM ${BUILD_FROM}
+FROM balenalib/generic-armv7ahf-debian-golang:latest
 
 
 # Set shell
