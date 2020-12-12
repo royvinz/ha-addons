@@ -1,15 +1,11 @@
-#FROM __BASEIMAGE_ARCH__/golang:alpine AS builder
-
-ARG BUILD_FROM
-FROM $BUILD_FROM
+FROM golang:alpine AS builder
 
 # Add prequisites
 RUN apk add --no-cache ca-certificates \
         git \
         gcc \
-        build-base \
-        go
-        
+        build-base 
+
 # Fetch go code
 RUN go get -v github.com/cloudflare/cloudflared/cmd/cloudflared
 
