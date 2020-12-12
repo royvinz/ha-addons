@@ -26,4 +26,4 @@ RUN mkdir /etc/cloudflared \
 
 COPY rootfs /
 
-#CMD [ "/run.sh" ]
+CMD [ "/run.sh" ]
