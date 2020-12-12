@@ -20,7 +20,7 @@ RUN chmod u+x /go/bin/app
 
 # Setup our scratch container
 FROM __BASEIMAGE_ARCH__/alpine:latest
-__CROSS_COPY qemu/qemu-__QEMU_ARCH__-static /usr/bin/
+#__CROSS_COPY qemu/qemu-__QEMU_ARCH__-static /usr/bin/
 COPY --from=builder /go/bin/app /usr/local/bin/cloudflared
 COPY --from=builder /etc/ssl/certs/ /etc/ssl/certs/
 ADD entrypoint.sh /entrypoint.sh
