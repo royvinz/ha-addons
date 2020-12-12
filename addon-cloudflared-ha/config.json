@@ -1,7 +1,7 @@
 
 {
     "name": "cloudflaredha",
-    "version": "0.16",
+    "version": "0.16.1",
     "slug": "cloudflaredha",
     "description": "long description",
     "url": "https://github.com/royvinz/ha-addons",
