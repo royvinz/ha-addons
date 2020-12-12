@@ -16,6 +16,21 @@ RUN chmod a+x /run.sh
 # So let's set it to our add-on persistent data directory.
 WORKDIR /data
 
+
+RUN apt-get -yqq update 
+COPY . /opt/flaskapp
+WORKDIR /opt/flaskapp
+
+# Supervisord
+RUN apt-get install -y supervisor
+RUN mkdir -p /var/log/supervisor
+RUN mkdir -p /etc/supervisor/conf.d/
+COPY supervisord.conf /etc/supervisord.conf
+
+# Python and Flask
+RUN apt-get -yqq install python3 python3-pip
+RUN pip3 install flask
+
 # Install requirements for add-on
 #UN apk add python3
 RUN mkdir /etc/cloudflared \
@@ -25,4 +40,4 @@ RUN mkdir /etc/cloudflared \
 
 COPY rootfs /
 
-CMD [ "/run.sh" ]
+CMD ["/usr/bin/supervisord"]
