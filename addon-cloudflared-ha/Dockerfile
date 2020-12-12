@@ -1,60 +1,29 @@
-FROM --platform=${BUILDPLATFORM:-linux/amd64} tonistiigi/xx:golang AS xgo
-FROM --platform=${BUILDPLATFORM:-linux/amd64} golang:1.13-alpine as builder
+FROM __BASEIMAGE_ARCH__/golang:alpine AS builder
 
-ARG BUILD_DATE
-ARG VCS_REF
-ARG VERSION
+# Add prequisites
+RUN apk add --no-cache ca-certificates \
+        git \
+        gcc \
+        build-base
+# Fetch go code
+RUN go get -v github.com/cloudflare/cloudflared/cmd/cloudflared
 
-COPY --from=xgo / /
-ARG TARGETPLATFORM
-ARG BUILDPLATFORM
-#RUN printf "I am running on ${BUILDPLATFORM:-linux/amd64}, building for ${TARGETPLATFORM:-linux/amd64}\n$(uname -a)\n"
+# Set working directory and build
+WORKDIR /go/src/github.com/cloudflare/cloudflared/cmd/cloudflared
+RUN CGO_ENABLED=0 \
+    GOOS=linux \
+    go build \
+    -o /go/bin/app \
+    -ldflags '-w -s -extldflags "-static"' \
+    /go/src/github.com/cloudflare/cloudflared/cmd/cloudflared
+RUN chmod u+x /go/bin/app
 
-ENV CLOUDFLARED_VERSION="2020.11.9"
-
-RUN apk --update --no-cache add \
-    bash \
-    build-base \
-    gcc \
-    git 
-  #&& rm -rf /tmp/* /var/cache/apk/*
-
-RUN git clone --branch ${CLOUDFLARED_VERSION} https://github.com/cloudflare/cloudflared /go/src/github.com/cloudflare/cloudflared
-WORKDIR /go/src/github.com/cloudflare/cloudflared
-RUN go build -v -mod vendor -ldflags "-w -s -X 'main.Version=${CLOUDFLARED_VERSION}' -X 'main.BuildTime=${BUILD_DATE}'" github.com/cloudflare/cloudflared/cmd/cloudflared
-
-FROM --platform=${TARGETPLATFORM:-linux/amd64} alpine:latest
-
-ARG BUILD_DATE
-ARG VCS_REF
-ARG VERSION
-
-LABEL maintainer="royvinz" \
-  org.opencontainers.image.created=$BUILD_DATE \
-  #org.opencontainers.image.url="https://github.com/buildsociety/cloudflared" \
-  #org.opencontainers.image.source="https://github.com/buildsociety/cloudflared" \
-  org.opencontainers.image.version=$VERSION \
-  org.opencontainers.image.revision=$VCS_REF \
-  #org.opencontainers.image.vendor="buildsociety" \
-  org.opencontainers.image.title="cloudflared" \
-  org.opencontainers.image.description="cloudflared is the client side component of Argo Tunnel by Cloudflare" \
-  org.opencontainers.image.licenses="MIT"
-
-RUN apk --update --no-cache add \
-    bind-tools \
-    ca-certificates \
-    dumb-init \
-    libressl \
-    shadow \
-    tzdata \
-  && addgroup -g 1000 cloudflared \
-  && adduser -u 1000 -G cloudflared -s /sbin/nologin -D cloudflared \
-  && rm -rf /tmp/* /var/cache/apk/*
-
-COPY --from=builder /go/src/github.com/cloudflare/cloudflared/cloudflared /usr/local/bin/cloudflared
-RUN cloudflared --version
-
-USER cloudflared
-
-ENTRYPOINT [ "/usr/bin/dumb-init", "--" ]
-CMD [ "/usr/local/bin/cloudflared", "--no-autoupdate" ]
+# Setup our scratch container
+FROM __BASEIMAGE_ARCH__/alpine:latest
+__CROSS_COPY qemu/qemu-__QEMU_ARCH__-static /usr/bin/
+COPY --from=builder /go/bin/app /usr/local/bin/cloudflared
+COPY --from=builder /etc/ssl/certs/ /etc/ssl/certs/
+ADD entrypoint.sh /entrypoint.sh
+RUN chmod u+x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["sh", "-c", "/usr/local/bin/cloudflared tunnel --no-autoupdate --no-tls-verify"] 
