@@ -1,28 +1,60 @@
+FROM --platform=${BUILDPLATFORM:-linux/amd64} tonistiigi/xx:golang AS xgo
+FROM --platform=${BUILDPLATFORM:-linux/amd64} golang:1.13-alpine as builder
 
-##ARG BUILD_FROM=hassioaddons/armhf-base-raspbian
-# hadolint ignore=DL3006
-#FROM ${BUILD_FROM}
-FROM balenalib/generic-armv7ahf-debian-golang:latest
+ARG BUILD_DATE
+ARG VCS_REF
+ARG VERSION
 
+COPY --from=xgo / /
+ARG TARGETPLATFORM
+ARG BUILDPLATFORM
+RUN printf "I am running on ${BUILDPLATFORM:-linux/amd64}, building for ${TARGETPLATFORM:-linux/amd64}\n$(uname -a)\n"
 
-# Set shell
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+ENV CLOUDFLARED_VERSION="2020.11.9"
 
-# Copy data for add-on
-COPY run.sh /
-RUN chmod a+x /run.sh
+RUN apk --update --no-cache add \
+    bash \
+    build-base \
+    gcc \
+    git \
+  && rm -rf /tmp/* /var/cache/apk/*
 
-# Python 3 HTTP Server serves the current working dir
-# So let's set it to our add-on persistent data directory.
-WORKDIR /data
+RUN git clone --branch ${CLOUDFLARED_VERSION} https://github.com/cloudflare/cloudflared /go/src/github.com/cloudflare/cloudflared
+WORKDIR /go/src/github.com/cloudflare/cloudflared
+RUN go build -v -mod vendor -ldflags "-w -s -X 'main.Version=${CLOUDFLARED_VERSION}' -X 'main.BuildTime=${BUILD_DATE}'" github.com/cloudflare/cloudflared/cmd/cloudflared
 
-# Install requirements for add-on
-#UN apk add python3
-RUN mkdir /etc/cloudflared \
-  && curl -L -s -o cloudflared "https://github.com/cloudflare/cloudflared/releases/download/2020.11.11/cloudflared-linux-arm64"  \
-  && cp cloudflared /usr/bin/cloudflared \
-  && chmod +x /usr/bin/cloudflared
+FROM --platform=${TARGETPLATFORM:-linux/amd64} alpine:latest
 
-COPY rootfs /
+ARG BUILD_DATE
+ARG VCS_REF
+ARG VERSION
 
-CMD ["/run.sh"]
+LABEL maintainer="royvinz" \
+  org.opencontainers.image.created=$BUILD_DATE \
+  #org.opencontainers.image.url="https://github.com/buildsociety/cloudflared" \
+  #org.opencontainers.image.source="https://github.com/buildsociety/cloudflared" \
+  org.opencontainers.image.version=$VERSION \
+  org.opencontainers.image.revision=$VCS_REF \
+  #org.opencontainers.image.vendor="buildsociety" \
+  org.opencontainers.image.title="cloudflared" \
+  org.opencontainers.image.description="cloudflared is the client side component of Argo Tunnel by Cloudflare" \
+  org.opencontainers.image.licenses="MIT"
+
+RUN apk --update --no-cache add \
+    bind-tools \
+    ca-certificates \
+    dumb-init \
+    libressl \
+    shadow \
+    tzdata \
+  && addgroup -g 1000 cloudflared \
+  && adduser -u 1000 -G cloudflared -s /sbin/nologin -D cloudflared \
+  && rm -rf /tmp/* /var/cache/apk/*
+
+COPY --from=builder /go/src/github.com/cloudflare/cloudflared/cloudflared /usr/local/bin/cloudflared
+RUN cloudflared --version
+
+USER cloudflared
+
+ENTRYPOINT [ "/usr/bin/dumb-init", "--" ]
+CMD [ "/usr/local/bin/cloudflared", "--no-autoupdate" ]
