@@ -1,4 +1,4 @@
-FROM golang:alpine AS builder
+FROM golang:alpine 
 
 # Add prequisites
 RUN apk add --no-cache ca-certificates \
@@ -27,8 +27,8 @@ RUN git clone https://github.com/cloudflare/cloudflared.git \
 # Setup our scratch container
 
 #__CROSS_COPY qemu/qemu-__QEMU_ARCH__-static /usr/bin/
-COPY --from=builder /go/bin/app /usr/local/bin/cloudflared
-COPY --from=builder /etc/ssl/certs/ /etc/ssl/certs/
+#COPY --from=builder /go/bin/app /usr/local/bin/cloudflared
+#COPY --from=builder /etc/ssl/certs/ /etc/ssl/certs/
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod u+x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
