@@ -14,7 +14,9 @@ RUN git clone https://github.com/cloudflare/cloudflared.git \
     && make cloudflared \
     && mv cloudflared /usr/local/bin/cloudflared \
     && chmod +x /usr/local/bin/cloudflared \
-    && mkdir /etc/cloudflared
+    #&& mkdir /etc/cloudflared
+    && cd /etc \
+    && ln -s /config/cloudflared cloudflared
 
 
 #RUN go get -v github.com/cloudflare/cloudflared/cmd/cloudflared
