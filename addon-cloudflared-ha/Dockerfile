@@ -41,4 +41,4 @@ ADD entrypoint.sh /entrypoint.sh
 RUN chmod u+x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 #CMD ["sh", "-c", "/usr/local/bin/cloudflared tunnel run --no-tls-verify /config/cert/argo.pem --config /config/cloudflared/config.yml"] 
-MD ["sh", "-c", "/usr/local/bin/cloudflared service install"] 
+CMD ["sh", "-c", "/usr/local/bin/cloudflared service install"] 
