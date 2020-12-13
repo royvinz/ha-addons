@@ -1,7 +1,7 @@
 
 {
     "name": "cloudflaredha",
-    "version": "0.18",
+    "version": "0.19",
     "slug": "cloudflaredha",
     "description": "long description",
     "url": "https://github.com/royvinz/ha-addons",
@@ -10,20 +10,10 @@
     "arch": [
       "aarch64"
     ],
-    "ingress": true,
+    "ingress": false,
 	  "panel_icon": "mdi:docker",
 	  "homeassistant": "0.104.0",
     "map": [
       "config:rw"
-    ],
-    "options": {
-        "hostname": "hostname",
-        "url": "http://hassio:8123",
-        "certificate": "/config/cert/argo.pem"
-    },
-    "schema": {
-      "hostname": "str",
-      "url": "str",
-      "certificate": "str"
-    }
+    ]
   }
