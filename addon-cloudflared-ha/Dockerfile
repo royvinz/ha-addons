@@ -40,5 +40,5 @@ COPY rootfs /
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod u+x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["sh", "-c", "/usr/local/bin/cloudflared tunnel --no-tls-verify --origincert config/cert/argo.pem --config /config/cloudflared/config.yml"] 
+CMD ["sh", "-c", "/usr/local/bin/cloudflared tunnel --no-tls-verify --origincert /config/cert/argo.pem --config /config/cloudflared/config.yml"] 
 #CMD ["sh", "-c", "/usr/local/bin/cloudflared service install"] 
