@@ -1,9 +1,9 @@
 
 {
-    "name": "cloudflaredha",
-    "version": "0.20",
-    "slug": "cloudflaredha",
-    "description": "long description",
+    "name": "CATH - Cloudflared Argo Tunnel Hub",
+    "version": "0.09",
+    "slug": "catcloudflaredargohub",
+    "description": "A Cloudflared Argo Tunnel working ARM64 Raspeberry PI 4 (64bits) and ingress routes in config file.",
     "url": "https://github.com/royvinz/ha-addons",
     "startup": "services",
     "boot": "auto",
@@ -15,15 +15,5 @@
 	  "homeassistant": "0.104.0",
     "map": [
       "config:rw"
-    ],
-    "options": {
-        "hostname": "hostname",
-        "url": "http://hassio:8123",
-        "certificate": "/config/cert/argo.pem"
-    },
-    "schema": {
-      "hostname": "str",
-      "url": "str",
-      "certificate": "str"
-    }
+    ]
   }
