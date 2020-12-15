@@ -15,5 +15,7 @@
 	  "homeassistant": "0.104.0",
     "map": [
       "config:rw"
-    ]
+    ],
+    "options": [],
+    "schema": []
   }
