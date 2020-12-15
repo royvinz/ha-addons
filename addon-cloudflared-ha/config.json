@@ -16,6 +16,6 @@
     "map": [
       "config:rw"
     ],
-    "options": false,
-    "schema": false
+    "options": {},
+    "schema": {}
   }
