@@ -1,7 +1,7 @@
 
 {
     "name": "CATH - Cloudflared Argo Tunnel Hub",
-    "version": "0.10",
+    "version": "0.99",
     "slug": "cathcloudflaredargotunnelhub",
     "description": "A Cloudflared Argo Tunnel working ARM64 Raspeberry PI 4 (64bits) and ingress routes in config file.",
     "url": "https://github.com/royvinz/ha-addons",
@@ -11,8 +11,7 @@
       "aarch64"
     ],
     "ingress": false,
-	  "panel_icon": "mdi:docker",
-	  "homeassistant": "0.104.0",
+    "panel_icon": "mdi:docker",
     "map": [
       "config:rw"
     ],
