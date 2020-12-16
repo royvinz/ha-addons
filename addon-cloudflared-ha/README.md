@@ -8,11 +8,11 @@ This is a Cloudflared Argo Tunnel working with ARM64 Raspeberry PI 4 (64bits) an
 
 ## PREREQUISITE
 
-1) You'll need to sign up for Argo with Cloudflare directly and generate an SSL certificate ('cert.pem' file) at the following url: https://www.cloudflare.com/a/warp
+1) You'll need to sign up for Argo with Cloudflare directly and generate an SSL certificate (`cert.pem` file) at the following url: https://www.cloudflare.com/a/warp 
 
-2) From a separate machine with cloudflared installed, run the command: `cloudflared tunnel create <tunnel name>` --\> it will generate a cloudflared crendentials-file ('xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx.json') that will will mount in the docker volume
+2) From a separate machine with cloudflared installed, run the command: `cloudflared tunnel create <tunnel name>` --\> it will generate a cloudflared crendentials-file (`xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx.json`) that will will mount in the docker volume
 
-3) Create a cloudflared configuration file that you will also mount in the docker volume. The configuration file format is (replace xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx.json below with the name of the file generated at step 2):
+3) Create a cloudflared configuration file that you will also mount in the docker volume. The configuration file format is (replace `xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx.json` below with the name of the file generated at step 2):
 
     ```
     #---------------------------
@@ -27,7 +27,7 @@ This is a Cloudflared Argo Tunnel working with ARM64 Raspeberry PI 4 (64bits) an
         service: http://192.168.1.100:8080 
       - service: http_status:404 
     #----------------------------------------
-```
+    ```
 
 
 ## CONFIGURATION
