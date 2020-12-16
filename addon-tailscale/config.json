@@ -1,7 +1,7 @@
 
 {
     "name": "Tailscale 4 Hassio",
-    "version": "0.01",
+    "version": "0.02",
     "slug": "tailscale4hassio",
     "description": "A Tailscale VPN addon for Home Assistant working with ARM64 Raspeberry PI 4 (64bits).",
     "url": "https://github.com/royvinz/ha-addons",
