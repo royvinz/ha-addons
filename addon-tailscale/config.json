@@ -18,5 +18,9 @@
     "options": {},
     "schema": {},
     "privileged": ["NET_ADMIN"],
-    "devices": ["/dev/net/tun:/dev/net/tun:rwm"]
+    "devices": [
+      "/dev/net/tun:/dev/net/tun:rwm",
+      "/var/lib:/var/lib:rwm"
+    ],
+    "host_network"  : true
   }
