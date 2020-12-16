@@ -12,7 +12,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get -y install gnupg\
 #sudo tailscale up
 
 
-#ADD entrypoint.sh /entrypoint.sh
+ADD entrypoint.sh /entrypoint.sh
 RUN chmod u+x /entrypoint.sh
 #RUN chmod u+x /config/tailscale/start.sh
 ENTRYPOINT ["/entrypoint.sh"]
