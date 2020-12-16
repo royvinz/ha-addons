@@ -4,7 +4,7 @@
     "version": "1.00",
     "slug": "cathcloudflaredargotunnelhub",
     "description": "A Cloudflared Argo Tunnel working with ARM64 Raspeberry PI 4 (64bits) and ingress routes in config file.",
-    "url": "https://github.com/royvinz/ha-addons/tree/master/addon-cath-cloudflared-argo-tunnel-hub",
+    "url": "https://github.com/royvinz/ha-addons",
     "startup": "services",
     "boot": "auto",
     "arch": [
