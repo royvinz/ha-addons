@@ -30,7 +30,7 @@ RUN apk add --no-cache ca-certificates \
 
 RUN git clone https://github.com/tailscale/tailscale.git \
     && cd tailscale \
-    && got get tailscale.com/cmd/tailscale{,d} \
+    && go get tailscale.com/cmd/tailscale{,d} \
     && /build_dist.sh tailscale.com/cmd/tailscale \
     && ./build_dist.sh tailscale.com/cmd/tailscaled 
 
