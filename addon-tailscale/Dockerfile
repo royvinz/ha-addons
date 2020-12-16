@@ -28,17 +28,16 @@ RUN apk add --no-cache ca-certificates \
         gcc \
         build-base 
 
-RUN git clone https://github.com/tailscale/tailscale.git
-
-COPY go.mod .
-COPY go.sum .
-COPY build_dist.sh .
-
+RUN git clone https://github.com/tailscale/tailscale.git \
+    && cd tailscale \
+    && got get tailscale.com/cmd/tailscale{,d} \
+    && /build_dist.sh tailscale.com/cmd/tailscale \
+    && ./build_dist.sh tailscale.com/cmd/tailscaled 
 
 # Fetch go code
 
-RUN ./build_dist.sh tailscale.com/cmd/tailscale \
-    && ./build_dist.sh tailscale.com/cmd/tailscaled 
+#RUN ./build_dist.sh tailscale.com/cmd/tailscale \
+ #   && ./build_dist.sh tailscale.com/cmd/tailscaled 
     #&& cd tailscale/ \
     #&& go clean 
     #&& go get github.com/cloudflare/cloudflared/cmd/cloudflared \
