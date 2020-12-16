@@ -1,10 +1,12 @@
-ARG BUILD_FROM=ubuntu:latest
-# hadolint ignore=DL3006
-FROM ${BUILD_FROM}
+FROM hassioaddons/ubuntu-base-aarch64:latest
 
 ENV LANG C.UTF-8
 
-RUN curl -fsSL https://pkgs.tailscale.com/unstable/ubuntu/xenial.gpg | tac | tac | apt-key add - \
+#RUN wget https://pkgs.tailscale.com/stable/tailscale_1.2.10_arm64.tgz \
+
+
+RUN apt-get install gnupg \ 
+    && curl -fsSL https://pkgs.tailscale.com/unstable/ubuntu/xenial.gpg | tac | tac | apt-key add - \
     && curl -fsSL https://pkgs.tailscale.com/unstable/ubuntu/xenial.list | tac | tac | tee /etc/apt/sources.list.d/tailscale.list \
     && apt-get update && apt-get install tailscale 
 #sudo tailscale up
