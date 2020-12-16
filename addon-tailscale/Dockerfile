@@ -15,5 +15,5 @@ RUN apt-get update && apt-get upgrade -y && apt-get -y install gnupg\
 #ADD entrypoint.sh /entrypoint.sh
 #RUN chmod u+x /entrypoint.sh
 #RUN chmod u+x /config/tailscale/start.sh
-ENTRYPOINT ["RUN chmod u+x /config/tailscale/start.sh", "&&", "/config/tailscale/start.sh"]
+ENTRYPOINT ["chmod u+x /config/tailscale/start.sh", "&&", "/config/tailscale/start.sh"]
 #CMD ["sh", "-c", "/usr/local/bin/cloudflared --no-autoupdate --config /config/cloudflared/config.yml tunnel run"] 
