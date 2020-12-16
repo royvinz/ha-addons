@@ -49,7 +49,7 @@ RUN git clone https://github.com/tailscale/tailscale.git \
     #&& ln -s /config/cloudflared cloudflared
 
 ADD entrypoint.sh /entrypoint.sh
-# RUN chmod u+x /entrypoint.sh
+RUN chmod u+x /entrypoint.sh
 # #RUN chmod u+x /config/tailscale/start.sh
 ENTRYPOINT ["/entrypoint.sh"]
 # #CMD ["sh", "-c", "/usr/local/bin/cloudflared --no-autoupdate --config /config/cloudflared/config.yml tunnel run"] 
