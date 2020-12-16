@@ -1,0 +1,20 @@
+
+{
+    "name": "Tailscale 4 Hassio",
+    "version": "0.01",
+    "slug": "tailscale4hassio",
+    "description": "A Tailscale VPN addon for Home Assistant working with ARM64 Raspeberry PI 4 (64bits).",
+    "url": "https://github.com/royvinz/ha-addons",
+    "startup": "services",
+    "boot": "auto",
+    "arch": [
+      "aarch64"
+    ],
+    "ingress": false,
+	  "panel_icon": "mdi:docker",
+    "map": [
+      "config:rw"
+    ],
+    "options": {},
+    "schema": {}
+  }
