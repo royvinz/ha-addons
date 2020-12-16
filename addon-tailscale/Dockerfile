@@ -20,18 +20,27 @@
 
 FROM golang:alpine 
 
+WORKDIR /go/src/tailscale
+
 # Add prequisites
 RUN apk add --no-cache ca-certificates \
         git \
         gcc \
         build-base 
 
+RUN git clone https://github.com/tailscale/tailscale.git
+
+COPY go.mod .
+COPY go.sum .
+COPY build_dist.sh .
+
+
 # Fetch go code
-RUN git clone https://github.com/tailscale/tailscale.git\
-    && ./build_dist.sh tailscale.com/cmd/tailscale \
-    && ./build_dist.sh tailscale.com/cmd/tailscaled \
+
+RUN ./build_dist.sh tailscale.com/cmd/tailscale \
+    && ./build_dist.sh tailscale.com/cmd/tailscaled 
     #&& cd tailscale/ \
-    && go clean 
+    #&& go clean 
     #&& go get github.com/cloudflare/cloudflared/cmd/cloudflared \
     #&& make cloudflared \
     #&& mv cloudflared /usr/local/bin/cloudflared \
