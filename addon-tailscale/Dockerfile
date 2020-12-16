@@ -32,7 +32,7 @@ RUN git clone https://github.com/tailscale/tailscale.git \
     && cd tailscale \
     && go get tailscale.com/cmd/tailscale \
     && go get tailscale.com/cmd/tailscaled \
-    && /build_dist.sh tailscale.com/cmd/tailscale \
+    && ./build_dist.sh tailscale.com/cmd/tailscale \
     && ./build_dist.sh tailscale.com/cmd/tailscaled 
 
 # Fetch go code
