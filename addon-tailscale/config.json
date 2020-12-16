@@ -16,5 +16,7 @@
       "config:rw"
     ],
     "options": {},
-    "schema": {}
+    "schema": {},
+    "privileged": ["NET_ADMIN"],
+    "devices": ["/dev/net/tun:/dev/net/tun:rwm"]
   }
