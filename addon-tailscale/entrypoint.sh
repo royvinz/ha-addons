@@ -1,6 +1,8 @@
 #!/bin/sh
-#echo "Updating Cloudflared..."
-tailscale up
+echo "chmod start..."
+chmod +x /config/tailscale/start.sh
+echo "run start.sh.."
+sh /config/tailscale/start.sh
 #cloudflared update
-echo "Starting Tailscale tunnel..."
-exec "$@"
+#echo "Starting Tailscale tunnel..."
+#exec "$@"
