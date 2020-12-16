@@ -26,7 +26,8 @@ WORKDIR /go/src/tailscale
 RUN apk add --no-cache ca-certificates \
         git \
         gcc \
-        build-base 
+        build-base \
+        iptables
 
 RUN git clone https://github.com/tailscale/tailscale.git \
     && cd tailscale \
