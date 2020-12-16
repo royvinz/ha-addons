@@ -1,27 +1,15 @@
-FROM golang:alpine 
+ARG BUILD_FROM
+FROM $BUILD_FROM
 
-# Add prequisites
-RUN apk add --no-cache ca-certificates \
-        git \
-        gcc \
-        build-base \
-        iptables \
-        iproute2
+ENV LANG C.UTF-8
 
-WORKDIR /go/src/tailscale
+RUN curl -fsSL https://pkgs.tailscale.com/unstable/ubuntu/xenial.gpg | sudo apt-key add - \
+    && curl -fsSL https://pkgs.tailscale.com/unstable/ubuntu/xenial.list | sudo tee /etc/apt/sources.list.d/tailscale.list \
+    && sudo apt-get update && sudo apt-get install tailscale 
+#sudo tailscale up
 
-# Fetch go code
-RUN git clone https://github.com/tailscale/tailscale.git \
-    && cd tailscale/ \
-    && go clean \
-    && go get tailscale.com/cmd/tailscale{,d} \
-    && make tailscale \
-    && mv tailscale /usr/local/bin/tailscale \
-    && chmod +x /usr/local/bin/tailscale \
-    && cd /etc \
-    && ln -s /config/tailscale tailscale
 
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod u+x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["sh", "-c", "/usr/local/bin/cloudflared --no-autoupdate --config /config/cloudflared/config.yml tunnel run"] 
+#CMD ["sh", "-c", "/usr/local/bin/cloudflared --no-autoupdate --config /config/cloudflared/config.yml tunnel run"] 
