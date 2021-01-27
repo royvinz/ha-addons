@@ -1,7 +1,7 @@
 
 {
     "name": "CATH - Cloudflared Argo Tunnel Hub",
-    "version": "1.00",
+    "version": "2021.1.5",
     "slug": "cathcloudflaredargotunnelhub",
     "description": "A Cloudflared Argo Tunnel working with ARM64 Raspeberry PI 4 (64bits) and ingress routes in config file.",
     "url": "https://github.com/royvinz/ha-addons",
